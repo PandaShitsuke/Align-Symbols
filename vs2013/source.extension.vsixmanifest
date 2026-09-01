@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+  <Metadata>
+    <Identity Id="PandaShitsuke.AlignSymbols" Version="1.0" Language="en-US" Publisher="PandaShitsuke" />
+    <DisplayName>Symbol Align (by column)</DisplayName>
+    <Description xml:space="preserve">Align symbols (=, +, &lt;&lt;, [, ], ;, . , -&gt;) in the selected code by column.</Description>
+  </Metadata>
+  <Installation>
+    <InstallationTarget Id="VisualStudio" Version="[12.0,13.0)" />
+  </Installation>
+  <Dependencies />
+  <Assets>
+    <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
+  </Assets>
+</PackageManifest>
