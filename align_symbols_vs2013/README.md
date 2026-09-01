@@ -7,7 +7,7 @@
 ## 目录
 
 ```
-vs2013-extension/
+align_symbols_vs2013/
 ├─ align_symbols_vs2013.sln
 ├─ align_symbols_vs2013/
 │  ├─ align_symbols_vs2013.csproj  # VS 2013 工程（.NET 4.5 / VS SDK）
