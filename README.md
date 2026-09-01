@@ -37,14 +37,16 @@ This repo contains **two products** that share the same alignment engine:
 
 ## Examples / 示例
 
-In each pair the first block is **before** and the second is **after**. 每组示例中，上为**对齐前**，下为**对齐后**。
+Each example shows the same lines in two groups. 每组示例中，上为**对齐前**，下为**对齐后**。
 
 ### 1. Bitfield / shift-sum assignment · 位段 / 移位求和赋值
 
 ```c
+// before
 Fuse_Data_Write[0x39][site_no] = Fuse_Data[site_no][0x39] = (curr.trim_key[site_no] << 4) + (curr.boost_ocp_trim[site_no] << 0);
 Fuse_Data_Write[0x3C][site_no] = Fuse_Data[site_no][0x3C] = (curr.boost_rcomp[site_no] << 5) + (curr.boost_ccomp_0[site_no] << 2) + (curr.com_sda_dly[site_no] << 0);
 
+// after
 Fuse_Data_Write[0x39][site_no] = Fuse_Data[site_no][0x39] = (curr.trim_key             [site_no] << 4) + (curr.boost_ocp_trim      [site_no] << 0) ;
 Fuse_Data_Write[0x3C][site_no] = Fuse_Data[site_no][0x3C] = (curr.boost_rcomp          [site_no] << 5) + (curr.boost_ccomp_0       [site_no] << 2) + (curr.com_sda_dly         [site_no] << 0) ;
 ```
@@ -52,9 +54,11 @@ Fuse_Data_Write[0x3C][site_no] = Fuse_Data[site_no][0x3C] = (curr.boost_rcomp   
 ### 2. Default / value register table · 默认值 / 寄存器表
 
 ```c
+// before
 /* 0x39 */ dflt.trim_key[site_no] = 10; dflt.boost_ocp_trim[site_no] = 00;
 /* 0x3C */ dflt.boost_rcomp[site_no] = 00; dflt.boost_ccomp_0[site_no] = 02; dflt.com_sda_dly[site_no] = 00;
 
+// after
 /* 0x39 */ dflt.trim_key             [site_no] = 10; dflt.boost_ocp_trim      [site_no] = 00;
 /* 0x3C */ dflt.boost_rcomp          [site_no] = 00; dflt.boost_ccomp_0       [site_no] = 02; dflt.com_sda_dly         [site_no] = 00;
 ```
@@ -62,10 +66,12 @@ Fuse_Data_Write[0x3C][site_no] = Fuse_Data[site_no][0x3C] = (curr.boost_rcomp   
 ### 3. Method / function call · 方法 / 函数调用
 
 ```c
+// before
 fxvi_SDA.TSet(FV, 0, FXVIe_10V, FXVIe_10MA, FXVIe_RELAY_ON);
 fxvi_VIN_LED.TSet(FV, 0, FXVIe_10V, FXVIe_10MA, FXVIe_RELAY_ON);
 acm_RESET.TSet(FV, 0, ACM200_10V, ACM200_10MA, ACM200_RELAY_ON);
 
+// after
 fxvi_SDA    .TSet(FV, 0, FXVIe_10V , FXVIe_10MA , FXVIe_RELAY_ON );
 fxvi_VIN_LED.TSet(FV, 0, FXVIe_10V , FXVIe_10MA , FXVIe_RELAY_ON );
 acm_RESET   .TSet(FV, 0, ACM200_10V, ACM200_10MA, ACM200_RELAY_ON);
@@ -74,10 +80,12 @@ acm_RESET   .TSet(FV, 0, ACM200_10V, ACM200_10MA, ACM200_RELAY_ON);
 ### 4. Nested member-access chain · 嵌套成员访问链
 
 ```c
+// before
 PIN30_LX->SetTestResult(site_no, 0, fxvi_LX.GetMeasResult(site_no, MVRET));
 PIN12_LDO2->SetTestResult(site_no, 0, fxvi_LDO2.GetMeasResult(site_no, MVRET));
 PIN14_RESET->SetTestResult(site_no, 0, acm_RESET.GetMeasResult(site_no, MVRET));
 
+// after
 PIN30_LX   ->SetTestResult(site_no, 0, fxvi_LX  .GetMeasResult(site_no, MVRET));
 PIN12_LDO2 ->SetTestResult(site_no, 0, fxvi_LDO2.GetMeasResult(site_no, MVRET));
 PIN14_RESET->SetTestResult(site_no, 0, acm_RESET.GetMeasResult(site_no, MVRET));
@@ -86,9 +94,11 @@ PIN14_RESET->SetTestResult(site_no, 0, acm_RESET.GetMeasResult(site_no, MVRET));
 ### 5. Call argument `name[sub]` inner alignment · 调用参数名`[下标]`内部对齐
 
 ```c
+// before
 	fxvi_VINP.GetContactCheckResult(site_no, vinp_kelvin[site_no], R_KL[site_no]);
 	acm_VCORE.GetContactCheckResult(site_no, vcore_kelvin[site_no], R_KL[site_no]);
 
+// after
 	fxvi_VINP  .GetContactCheckResult(site_no, vinp_kelvin [site_no], R_KL[site_no]);
 	acm_VCORE  .GetContactCheckResult(site_no, vcore_kelvin[site_no], R_KL[site_no]);
 ```
@@ -96,10 +106,12 @@ PIN14_RESET->SetTestResult(site_no, 0, acm_RESET.GetMeasResult(site_no, MVRET));
 ### 6. Chained subscript call argument · 链式下标实参
 
 ```c
+// before
 	LX_Kelvin->SetTestResult(site_no, 0, lx_kelvin[site_no]);
 	CH1_Kelvin->SetTestResult(site_no, 0, ch_kelvin[site_no][0]);
 	VIN_LED_Kelvin->SetTestResult(site_no, 0, vin_led_kelvin[site_no]);
 
+// after
 	LX_Kelvin     ->SetTestResult(site_no, 0, lx_kelvin     [site_no]);
 	CH1_Kelvin    ->SetTestResult(site_no, 0, ch_kelvin     [site_no][0]);
 	VIN_LED_Kelvin->SetTestResult(site_no, 0, vin_led_kelvin[site_no]);
@@ -108,9 +120,11 @@ PIN14_RESET->SetTestResult(site_no, 0, acm_RESET.GetMeasResult(site_no, MVRET));
 ### 7. Array-subscript accessor (`[`) · 数组下标访问符
 
 ```c
+// before
 global_lx_leak[leak_flag][site_no] = lx_leak[site_no];
 global_vin_led_leak[leak_flag][site_no] = vin_led_leak[site_no];
 
+// after
 global_lx_leak     [leak_flag][site_no] = lx_leak     [site_no];
 global_vin_led_leak[leak_flag][site_no] = vin_led_leak[site_no];
 ```
@@ -118,9 +132,11 @@ global_vin_led_leak[leak_flag][site_no] = vin_led_leak[site_no];
 ### 8. Leading assignment + string literal · 前置赋值 + 字符串字面量
 
 ```c
+// before
 CParam *LX_Leak = StsGetParam(funcindex, "LX_Leak");
 CParam *VIN_LED_Leak = StsGetParam(funcindex, "VIN_LED_Leak");
 
+// after
 CParam *LX_Leak      = StsGetParam(funcindex, "LX_Leak"     );
 CParam *VIN_LED_Leak = StsGetParam(funcindex, "VIN_LED_Leak");
 ```
@@ -128,10 +144,12 @@ CParam *VIN_LED_Leak = StsGetParam(funcindex, "VIN_LED_Leak");
 ### 9. General fallback + numeric right-align · 通用兜底 + 数字右对齐
 
 ```c
+// before
 int a = 1;
 int bb = 22;
 int ccc = 333;
 
+// after
 int a   =   1 ;
 int bb  =  22 ;
 int ccc = 333 ;
@@ -163,17 +181,11 @@ Open `align_symbols_vs2013\align_symbols_vs2013.sln` in VS 2013 → **Build Solu
 
 ## How it aligns / 对齐规则
 
-1. Each column is aligned to the widest token at that position (per cell / per row).
-2. For member / accessor columns the identifier is padded so the following `.`, `->`, `[`, `(` or operator lines up.
-3. Numeric operands are right-aligned so `)` / `;` line up.
-4. A row with fewer cells than the longest row has its trailing `;` snapped to the matching separator column, so short rows gain no trailing whitespace.
-5. Only whitespace is inserted; tokens are unchanged.
-
-1. 每一列对齐到该列最宽的 token（按单元格 / 按行）。
-2. 成员/访问符列：标识符补齐，使其后的 `.`、`->`、`[`、`(` 或运算符对齐。
-3. 数字操作数右对齐，使 `)` / `;` 成列。
-4. 单元格更少的行会把它末尾的 `;` 对齐到最长行对应的分隔符列，因此短行不会产生尾部空白。
-5. 只插入空格，token 不变。
+1. Each column is aligned to the widest token at that position (per cell / per row). · 每一列对齐到该列最宽的 token（按单元格 / 按行）。
+2. For member / accessor columns the identifier is padded so the following `.`, `->`, `[`, `(` or operator lines up. · 成员/访问符列：标识符补齐，使其后的 `.`、`->`、`[`、`(` 或运算符对齐。
+3. Numeric operands are right-aligned so `)` / `;` line up. · 数字操作数右对齐，使 `)` / `;` 成列。
+4. A row with fewer cells than the longest row has its trailing `;` snapped to the matching separator column, so short rows gain no trailing whitespace. · 单元格更少的行会把它末尾的 `;` 对齐到最长行对应的分隔符列，因此短行不会产生尾部空白。
+5. Only whitespace is inserted; tokens are unchanged. · 只插入空格，token 不变。
 
 ---
 
