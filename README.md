@@ -12,13 +12,14 @@
 ```
 Align Symbols/
 ├─ README.md                 # 本文件（项目总览）
+├─ CHANGELOG.md              # 更新日志（VS Code 与 VS2013 两种版本）
 ├─ LICENSE                   # MIT（项目级，两个扩展共用）
 ├─ .gitignore / .gitattributes
 ├─ align_symbols_vscode/     # VS Code 扩展
 │  ├─ package.json           # 扩展清单
 │  ├─ extension.js           # 扩展入口（命令注册）
 │  ├─ aligner.js             # 对齐引擎（核心）
-│  ├─ README.md CHANGELOG.md LICENSE icon.png
+│  ├─ README.md LICENSE icon.png
 │  ├─ scripts/               # build_vsix.py gen_icon.py verify_vsix.py release.py
 │  ├─ test/                  # regression.js + cases/（回归用例）
 │  ├─ release/               # 构建出的 *.vsix
@@ -49,6 +50,10 @@ code --install-extension release/align_symbols_vscode-0.9.0.vsix
 使用：**工具 → Align Selected Code**，或编辑器**右键 → Align Selected Code**。
 
 详见 `align_symbols_vscode/README.md` 与 `align_symbols_vs2013/README.md`。
+
+## 更新日志
+
+各版本的变更（VS Code 与 VS2013 分开说明）见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 许可
 MIT — 见 [LICENSE](LICENSE)。
