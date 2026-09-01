@@ -16,7 +16,8 @@ namespace PandaShitsuke.AlignSymbols
         public static void Initialize(Package package)
         {
             _package = package;
-            var service = package.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
+            IServiceProvider provider = (IServiceProvider)package;
+            var service = provider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             if (service != null)
             {
                 _menuItem = new OleMenuCommand(Execute, new CommandID(CommandSet, CommandId));
@@ -27,14 +28,17 @@ namespace PandaShitsuke.AlignSymbols
 
         private static void OnBeforeQueryStatus(object sender, EventArgs e)
         {
-            var dte = _package.GetService(typeof(DTE)) as DTE;
-            _menuItem.Enabled = dte != null && dte.ActiveDocument != null;
+            IServiceProvider provider = (IServiceProvider)_package;
+            var dte = provider.GetService(typeof(DTE)) as DTE;
+            _menuItem.Enabled = (dte != null && dte.ActiveDocument != null);
         }
 
         private static void Execute(object sender, EventArgs e)
         {
-            var dte = _package.GetService(typeof(DTE)) as DTE;
-            var doc = dte?.ActiveDocument;
+            IServiceProvider provider = (IServiceProvider)_package;
+            var dte = provider.GetService(typeof(DTE)) as DTE;
+            if (dte == null) return;
+            Document doc = dte.ActiveDocument;
             if (doc == null) return;
             TextSelection selection = doc.Selection as TextSelection;
             if (selection == null) return;

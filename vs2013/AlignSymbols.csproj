@@ -31,6 +31,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Design" />
     <Reference Include="Microsoft.VisualStudio.Shell.12.0">
       <HintPath>$(DevEnvDir)PublicAssemblies\Microsoft.VisualStudio.Shell.12.0.dll</HintPath>
     </Reference>
