@@ -2,6 +2,8 @@ import json, os, zipfile
 
 # Repo root is one level above this script (which sits in "scripts/").
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+# Project root (contains both the vscode/ and vs2013/ trees) is two levels up.
+REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 PACKAGE = os.path.join(ROOT, "package.json")
 RELEASE = os.path.join(ROOT, "release")
 
@@ -56,7 +58,7 @@ os.makedirs(RELEASE, exist_ok=True)
 if os.path.exists(VSIX):
     os.remove(VSIX)
 
-files = ["package.json", "extension.js", "aligner.js", "README.md", "CHANGELOG.md", "LICENSE", "icon.png"]
+files = ["package.json", "extension.js", "aligner.js", "README.md", "LICENSE", "icon.png"]
 with zipfile.ZipFile(VSIX, "w", zipfile.ZIP_DEFLATED) as zf:
     add(zf, "[Content_Types].xml", CONTENT_TYPES)
     add(zf, "extension.vsixmanifest", MANIFEST)
@@ -66,5 +68,11 @@ with zipfile.ZipFile(VSIX, "w", zipfile.ZIP_DEFLATED) as zf:
             raise SystemExit("missing " + p)
         with open(p, "rb") as fh:
             add(zf, "extension/" + f, fh.read())
+    # Include the bilingual project changelog from the repo root.
+    changelog = os.path.join(REPO_ROOT, "CHANGELOG.md")
+    if not os.path.exists(changelog):
+        raise SystemExit("missing " + changelog)
+    with open(changelog, "rb") as fh:
+        add(zf, "extension/CHANGELOG.md", fh.read())
 
 print("wrote", VSIX, os.path.getsize(VSIX), "bytes")
