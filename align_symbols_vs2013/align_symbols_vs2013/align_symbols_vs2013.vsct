@@ -68,7 +68,7 @@
         <Parent guid="guidAlignSymbolsCmdSet" id="MyMenuGroup" />
         <Icon guid="guidImages" id="bmpPic1" />
         <Strings>
-          <ButtonText>AlignSelectedCode</ButtonText>
+          <ButtonText>Align Selected Code</ButtonText>
         </Strings>
       </Button>
 
