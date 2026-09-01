@@ -58,7 +58,7 @@ os.makedirs(RELEASE, exist_ok=True)
 if os.path.exists(VSIX):
     os.remove(VSIX)
 
-files = ["package.json", "extension.js", "aligner.js", "README.md", "LICENSE", "icon.png"]
+files = ["package.json", "extension.js", "aligner.js", "LICENSE", "icon.png"]
 with zipfile.ZipFile(VSIX, "w", zipfile.ZIP_DEFLATED) as zf:
     add(zf, "[Content_Types].xml", CONTENT_TYPES)
     add(zf, "extension.vsixmanifest", MANIFEST)
@@ -68,11 +68,12 @@ with zipfile.ZipFile(VSIX, "w", zipfile.ZIP_DEFLATED) as zf:
             raise SystemExit("missing " + p)
         with open(p, "rb") as fh:
             add(zf, "extension/" + f, fh.read())
-    # Include the bilingual project changelog from the repo root.
-    changelog = os.path.join(REPO_ROOT, "CHANGELOG.md")
-    if not os.path.exists(changelog):
-        raise SystemExit("missing " + changelog)
-    with open(changelog, "rb") as fh:
-        add(zf, "extension/CHANGELOG.md", fh.read())
+    # Include the project-level README and changelog from the repo root.
+    for repo_rel, arc in (("README.md", "extension/README.md"), ("CHANGELOG.md", "extension/CHANGELOG.md")):
+        p = os.path.join(REPO_ROOT, repo_rel)
+        if not os.path.exists(p):
+            raise SystemExit("missing " + p)
+        with open(p, "rb") as fh:
+            add(zf, arc, fh.read())
 
 print("wrote", VSIX, os.path.getsize(VSIX), "bytes")
