@@ -1,3 +1,4 @@
+import os
 from PIL import Image, ImageDraw
 
 SIZE = 128
@@ -17,5 +18,6 @@ for y, w in zip(ys, widths):
     x1 = x0 + w
     d.rounded_rectangle((x0, y, x1, y + bar_h), radius=4, fill=(78, 201, 176, 255))
 
-img.save("icon.png")
+out = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "icon.png"))
+img.save(out)
 print("wrote icon.png", img.size)
