@@ -1,0 +1,7 @@
+global_lx_leak     [leak_flag][site_no] = lx_leak     [site_no];
+global_vout_leak   [leak_flag][site_no] = vout_leak   [site_no];
+global_a0_leak     [leak_flag][site_no] = a0_leak     [site_no];
+global_scl_leak    [leak_flag][site_no] = scl_leak    [site_no];
+global_sda_leak    [leak_flag][site_no] = sda_leak    [site_no];
+global_vdc_leak    [leak_flag][site_no] = vdc_leak    [site_no];
+global_vin_led_leak[leak_flag][site_no] = vin_led_leak[site_no];

@@ -1,0 +1,44 @@
+{
+  "name": "align-symbols",
+  "displayName": "Symbol Align (by column)",
+  "description": "Align assignment symbols (=, +, <<, |=, [, ], ;) by column for chained bitfield assignments and member[sub]=value tables.",
+  "version": "0.9.0",
+  "publisher": "codex",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Formatters",
+    "Other"
+  ],
+  "main": "./extension.js",
+  "activationEvents": [
+    "onCommand:alignSymbols.align"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "alignSymbols.align",
+        "title": "Align Symbols (by column)",
+        "category": "Symbol Align"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "alignSymbols.align",
+        "key": "ctrl+alt+a",
+        "when": "editorTextFocus"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "alignSymbols.align",
+          "group": "1_modification@50",
+          "when": "editorTextFocus"
+        }
+      ]
+    }
+  }
+}

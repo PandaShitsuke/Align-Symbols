@@ -1,0 +1,13 @@
+CParam *LX_Leak      = StsGetParam(funcindex, "LX_Leak"     );
+CParam *VOUT_Leak    = StsGetParam(funcindex, "VOUT_Leak"   );
+CParam *CH1_Leak     = StsGetParam(funcindex, "CH1_Leak"    );
+CParam *CH2_Leak     = StsGetParam(funcindex, "CH2_Leak"    );
+CParam *CH3_Leak     = StsGetParam(funcindex, "CH3_Leak"    );
+CParam *CH4_Leak     = StsGetParam(funcindex, "CH4_Leak"    );
+CParam *CH5_Leak     = StsGetParam(funcindex, "CH5_Leak"    );
+CParam *CH6_Leak     = StsGetParam(funcindex, "CH6_Leak"    );
+CParam *A0_Leak      = StsGetParam(funcindex, "A0_Leak"     );
+CParam *SCL_Leak     = StsGetParam(funcindex, "SCL_Leak"    );
+CParam *SDA_Leak     = StsGetParam(funcindex, "SDA_Leak"    );
+CParam *VDC_Leak     = StsGetParam(funcindex, "VDC_Leak"    );
+CParam *VIN_LED_Leak = StsGetParam(funcindex, "VIN_LED_Leak");

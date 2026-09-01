@@ -1,0 +1,12 @@
+	PIN30_LX->SetTestResult(site_no, 0, fxvi_LX.GetMeasResult(site_no, MVRET));
+	PIN1_EN->SetTestResult(site_no, 0, fxvi_EN.GetMeasResult(site_no, MVRET));
+	PIN4_SCL->SetTestResult(site_no, 0, fxvi_SCL.GetMeasResult(site_no, MVRET));
+	PIN33_CH1->SetTestResult(site_no, 0, acm_CH1.GetMeasResult(site_no, MVRET));
+	PIN35_CH3->SetTestResult(site_no, 0, acm_CH3.GetMeasResult(site_no, MVRET));
+	PIN38_CH5->SetTestResult(site_no, 0, acm_CH5.GetMeasResult(site_no, MVRET));
+	PIN12_LDO2->SetTestResult(site_no, 0, fxvi_LDO2.GetMeasResult(site_no, MVRET));
+	PIN24_LXP->SetTestResult(site_no, 0, fxvi_LXP.GetMeasResult(site_no, MVRET));
+	PIN7_VCORE->SetTestResult(site_no, 0, acm_VCORE.GetMeasResult(site_no, MVRET));
+	PIN17_GMA1->SetTestResult(site_no, 0, acm_GMA1.GetMeasResult(site_no, MVRET));
+	PIN20_CX1->SetTestResult(site_no, 0, acm_CX1.GetMeasResult(site_no, MVRET));
+	PIN14_RESET->SetTestResult(site_no, 0, acm_RESET.GetMeasResult(site_no, MVRET));
