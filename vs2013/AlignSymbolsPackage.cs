@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.Shell;
 namespace PandaShitsuke.AlignSymbols
 {
     [PackageRegistration(UseManagedResourcesOnly = true)]
-    [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
+    [InstalledProductRegistration("#110", "#112", "1.0")]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(PackageGuidString)]
     public sealed class AlignSymbolsPackage : Package
