@@ -4,40 +4,47 @@
 
 **AlignSymbols** 把连续、结构相似的 C / C++ 代码行按符号（`=`、`(`、`)`、`[`、`]`、`.`、`->`、`<<`、`+`、`|`、`,`、`;`）分列对齐成可读的表格。它**只插入空格**——绝不重排、改名或改动任何 token——因此语义不变，并且只处理结构相同的连续行。
 
-This repo contains **two products** that share the same alignment engine:
+This repo contains **two products** that share the same alignment engine.
 
-本仓库包含**两个产品**，共用同一套对齐引擎：
+本仓库包含**两个产品**，共用同一套对齐引擎。
 
-- **`align_symbols_vscode/`** — **VS Code extension** (package `align_symbols_vscode`; recommended, feature-complete) · VS Code 扩展（包名 `align_symbols_vscode`，推荐、功能最全）
-- **`align_symbols_vs2013/`** — **Visual Studio 2013 extension** (package `align_symbols_vs2013`; for STS8300 / ATE test stations running VS 2013) · VS 2013 扩展（包名 `align_symbols_vs2013`，用于 STS8300 / ATE 机台的 VS 2013 环境）
+- **`align_symbols_vscode/`** — **VS Code extension** (package `align_symbols_vscode`; recommended, feature-complete).
+- **`align_symbols_vscode/`** — **VS Code 扩展**（包名 `align_symbols_vscode`，推荐、功能最全）。
+- **`align_symbols_vs2013/`** — **Visual Studio 2013 extension** (package `align_symbols_vs2013`; for STS8300 / ATE test stations running VS 2013).
+- **`align_symbols_vs2013/`** — **VS 2013 扩展**（包名 `align_symbols_vs2013`，用于 STS8300 / ATE 机台的 VS 2013 环境）。
 
 ---
 
 ## Features / 功能
 
 - **Bitfield / shift-sum** — `LHS = LHS = ... = (member[sub] << shift) + ... ;` aligns the `=` and the `( member [sub] << shift )` cells plus the `+` / `|` separators.
-- **Default / value table** — `[/* address */] member[sub] OP value; member[sub] OP value; ... ;` aligns each member so `[` / `]` line up and right-aligns numeric values.
-- **Method / function call** — `[LHS =] obj.Func(arg1, arg2, ...);` aligns a leading `LHS =`, the object (so `.` / `->` / `(` align) and the arguments.
-- **Nested member-access chain** — `OBJ1->Method1(a, b, OBJ2.Method2(c, d));` aligns every identifier before a `->` / `.` and treats `[` as an accessor so array assignments align their bracket columns.
-- **Call argument `name[sub]`** — pads only the name so the inner `[sub]` aligns; chained `name[s1][s2]` is split at the first `[` so the rest of the bracket chain stays glued.
-- **General fallback** — any run of consecutive lines with an identical symbol skeleton is aligned column-by-column; identifiers are left-aligned and **numeric literals are right-aligned**.
-- **Safe & targeted** — attached operators (`.`, `->`, `(`, `[`, `]`, `::`) stay glued; `=`, `+`, `,`, `;`, `)` get a space around them; non-matching lines (control flow, function headers, mixed shapes) are left untouched.
-
---
-
 - **位段 / 移位求和** —— `LHS = LHS = ... = (member[sub] << shift) + ... ;`，对齐 `=`、`( member [sub] << shift )` 各列以及 `+` / `|` 分隔符。
+
+- **Default / value table** — `[/* address */] member[sub] OP value; member[sub] OP value; ... ;` aligns each member so `[` / `]` line up and right-aligns numeric values.
 - **默认值 / 寄存器表** —— `[/* 地址 */] member[sub] OP value; member[sub] OP value; ... ;`，让每个 `member` 补齐使 `[` / `]` 成列，并让数值右对齐。
+
+- **Method / function call** — `[LHS =] obj.Func(arg1, arg2, ...);` aligns a leading `LHS =`, the object (so `.` / `->` / `(` align) and the arguments.
 - **方法 / 函数调用** —— `[LHS =] obj.Func(arg1, arg2, ...);`，对齐前导的 `LHS =`、对象名（使 `.` / `->` / `(` 成列）以及各实参。
+
+- **Nested member-access chain** — `OBJ1->Method1(a, b, OBJ2.Method2(c, d));` aligns every identifier before a `->` / `.` and treats `[` as an accessor so array assignments align their bracket columns.
 - **嵌套成员访问链** —— `OBJ1->Method1(a, b, OBJ2.Method2(c, d));`，按序对齐每个 `->` / `.` 前的标识符；同时把 `[` 当作访问符，数组赋值也会对齐下标列。
+
+- **Call argument `name[sub]`** — pads only the name so the inner `[sub]` aligns; chained `name[s1][s2]` is split at the first `[` so the rest of the bracket chain stays glued.
 - **调用参数 `name[sub]`** —— 只填充名字使内部 `[sub]` 对齐；链式 `name[s1][s2]` 在首个 `[` 处拆分，其余括号链保持粘连。
+
+- **General fallback** — any run of consecutive lines with an identical symbol skeleton is aligned column-by-column; identifiers are left-aligned and **numeric literals are right-aligned**.
 - **通用兜底** —— 任何“符号骨架相同”的连续行都会按列对齐；标识符左对齐，**纯数字右对齐**。
+
+- **Safe & targeted** — attached operators (`.`, `->`, `(`, `[`, `]`, `::`) stay glued; `=`, `+`, `,`, `;`, `)` get a space around them; non-matching lines (control flow, function headers, mixed shapes) are left untouched.
 - **安全且克制** —— 紧贴运算符（`.`、`->`、`(`、`[`、`]`、`::`）与前词之间不留空格；`=`、`+`、`,`、`;`、`)` 前后留一个空格；不匹配的行（控制流、函数头、混合结构）保持原样。
 
 ---
 
 ## Examples / 示例
 
-Each example shows the same lines in two groups. 每组示例中，上为**对齐前**，下为**对齐后**。
+Each example shows the same lines in two groups.
+
+每组示例中，上为**对齐前**，下为**对齐后**。
 
 ### 1. Bitfield / shift-sum assignment · 位段 / 移位求和赋值
 
@@ -161,7 +168,9 @@ int ccc = 333 ;
 
 ### VS Code extension · VS Code 扩展
 
-From a `.vsix` package / 从 .vsix 包安装:
+From a `.vsix` package:
+
+从 `.vsix` 包安装：
 
 ```bash
 code --install-extension release/align_symbols_vscode-0.9.0.vsix
@@ -181,11 +190,25 @@ Open `align_symbols_vs2013\align_symbols_vs2013.sln` in VS 2013 → **Build Solu
 
 ## How it aligns / 对齐规则
 
-1. Each column is aligned to the widest token at that position (per cell / per row). · 每一列对齐到该列最宽的 token（按单元格 / 按行）。
-2. For member / accessor columns the identifier is padded so the following `.`, `->`, `[`, `(` or operator lines up. · 成员/访问符列：标识符补齐，使其后的 `.`、`->`、`[`、`(` 或运算符对齐。
-3. Numeric operands are right-aligned so `)` / `;` line up. · 数字操作数右对齐，使 `)` / `;` 成列。
-4. A row with fewer cells than the longest row has its trailing `;` snapped to the matching separator column, so short rows gain no trailing whitespace. · 单元格更少的行会把它末尾的 `;` 对齐到最长行对应的分隔符列，因此短行不会产生尾部空白。
-5. Only whitespace is inserted; tokens are unchanged. · 只插入空格，token 不变。
+1. Each column is aligned to the widest token at that position (per cell / per row).
+
+   每一列对齐到该列最宽的 token（按单元格 / 按行）。
+
+2. For member / accessor columns the identifier is padded so the following `.`, `->`, `[`, `(` or operator lines up.
+
+   成员/访问符列：标识符补齐，使其后的 `.`、`->`、`[`、`(` 或运算符对齐。
+
+3. Numeric operands are right-aligned so `)` / `;` line up.
+
+   数字操作数右对齐，使 `)` / `;` 成列。
+
+4. A row with fewer cells than the longest row has its trailing `;` snapped to the matching separator column, so short rows gain no trailing whitespace.
+
+   单元格更少的行会把它末尾的 `;` 对齐到最长行对应的分隔符列，因此短行不会产生尾部空白。
+
+5. Only whitespace is inserted; tokens are unchanged.
+
+   只插入空格，token 不变。
 
 ---
 
@@ -212,8 +235,9 @@ Align Symbols/
    └─ release/               # 构建出的 .vsix
 ```
 
-> The project-level `README.md` and `CHANGELOG.md` at the repo root are intentionally packaged into the VS Code extension as well, so the extension detail page shows the same combined documentation.
-> 仓库根目录的 `README.md` 与 `CHANGELOG.md` 同时被打包进 VS Code 扩展，因此扩展详情页会展示这套合并文档。
+The project-level `README.md` and `CHANGELOG.md` at the repo root are intentionally packaged into the VS Code extension as well, so the extension detail page shows the same combined documentation.
+
+仓库根目录的 `README.md` 与 `CHANGELOG.md` 同时被打包进 VS Code 扩展，因此扩展详情页会展示这套合并文档。
 
 ---
 
@@ -232,17 +256,23 @@ python scripts/gen_icon.py
 node test/regression.js
 ```
 
-The extension is plain CommonJS — there is no compiler / bundler step; edits take effect after reloading the debug host. 扩展为纯 CommonJS，无编译/打包步骤；改动后重载调试宿主即可。
+The extension is plain CommonJS — there is no compiler / bundler step; edits take effect after reloading the debug host.
+
+扩展为纯 CommonJS，无编译/打包步骤；改动后重载调试宿主即可。
 
 ### VS 2013 extension
 
-Build with the VS 2013 toolchain (`MSBuild 12` + VS SDK) or in VS 2013 via the solution. `Aligner.cs` is a C# port of the same rules; the command writes back with `EditPoint.ReplaceText` to avoid VS 2013 deadlocks. 用 VS 2013 工具链（MSBuild 12 + VS SDK）或在 VS 2013 里通过解决方案生成。`Aligner.cs` 是同一规则的 C# 移植；命令用 `EditPoint.ReplaceText` 写回以避免 VS 2013 死锁。
+Build with the VS 2013 toolchain (`MSBuild 12` + VS SDK) or in VS 2013 via the solution. `Aligner.cs` is a C# port of the same rules; the command writes back with `EditPoint.ReplaceText` to avoid VS 2013 deadlocks.
+
+用 VS 2013 工具链（MSBuild 12 + VS SDK）或在 VS 2013 里通过解决方案生成。`Aligner.cs` 是同一规则的 C# 移植；命令用 `EditPoint.ReplaceText` 写回以避免 VS 2013 死锁。
 
 ---
 
 ## Publish to VS Code Marketplace / 上架 VS Code 商店
 
-This is a valid VS Code extension (`package.json`, `README.md`, `LICENSE`, `CHANGELOG.md`, an icon and `.vscodeignore`), so it can be published. 这是一个标准合法的 VS Code 扩展，可以发布。
+This is a valid VS Code extension (`package.json`, `README.md`, `LICENSE`, `CHANGELOG.md`, an icon and `.vscodeignore`), so it can be published.
+
+这是一个标准合法的 VS Code 扩展，可以发布。
 
 ```bash
 npm install -g @vscode/vsce
@@ -256,8 +286,12 @@ vsce publish
 
 ## Changelog / 更新日志
 
-See [CHANGELOG.md](CHANGELOG.md) for per-version changes (VS Code and VS2013 described separately). 各版本变更（VS Code 与 VS2013 分开说明）见 [CHANGELOG.md](CHANGELOG.md)。
+See [CHANGELOG.md](CHANGELOG.md) for per-version changes (VS Code and VS2013 described separately).
+
+各版本变更（VS Code 与 VS2013 分开说明）见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## License / 许可
 
 MIT — see [LICENSE](LICENSE).
+
+MIT —— 见 [LICENSE](LICENSE)。
