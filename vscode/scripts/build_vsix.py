@@ -10,7 +10,7 @@ with open(PACKAGE, encoding="utf-8") as fh:
 VERSION = PKG["version"]
 PUBLISHER = PKG["publisher"]
 ID = "%s.%s" % (PUBLISHER, PKG["name"])
-VSIX = os.path.join(RELEASE, "align-symbols-%s.vsix" % VERSION)
+VSIX = os.path.join(RELEASE, "align_symbols_vscode-%s.vsix" % VERSION)
 
 MANIFEST = (
     '<?xml version="1.0" encoding="utf-8"?>\n'

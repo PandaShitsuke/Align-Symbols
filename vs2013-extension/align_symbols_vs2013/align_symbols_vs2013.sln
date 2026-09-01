@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlignSymbols", "AlignSymbols\AlignSymbols.csproj", "{26CCCD69-B118-42B2-A7F6-B0803EC15872}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "align_symbols_vs2013", "align_symbols_vs2013\align_symbols_vs2013.csproj", "{26CCCD69-B118-42B2-A7F6-B0803EC15872}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

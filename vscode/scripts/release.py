@@ -2,7 +2,7 @@ import json, os, re, subprocess, tempfile
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 CHANGELOG = os.path.join(ROOT, "CHANGELOG.md")
-REPO = "PandaShitsuke/Align-Symbols"
+REPO = "PandaShitsuke/AlignSymbols"
 GH = r"C:\Program Files\GitHub CLI\gh.exe"
 
 with open(CHANGELOG, encoding="utf-8") as fh:
@@ -21,7 +21,7 @@ for s in sections[1:]:
 versions = sorted(notes.keys(), key=lambda v: [int(x) for x in v.split(".")])
 
 for ver in versions:
-    vsix = os.path.join(ROOT, "release", "align-symbols-%s.vsix" % ver)
+    vsix = os.path.join(ROOT, "release", "align_symbols_vscode-%s.vsix" % ver)
     if not os.path.exists(vsix):
         print("SKIP %s: missing %s" % (ver, vsix))
         continue

@@ -1,9 +1,9 @@
-# Align Symbols
+# AlignSymbols
 
 这个仓库包含**两个独立但同源的“按符号分列对齐”插件**，用于把结构相似的代码对齐成可读的表格：
 
-- **`vscode/`** — **VS Code 扩展**（TypeScript/JS，推荐、功能最全）
-- **`vs2013-extension/`** — **Visual Studio 2013 扩展**（C#，用于 STS8300 / ATE 机台的 VS 2013 环境）
+- **`vscode/`** — **VS Code 扩展**（包名 `align_symbols_vscode`，推荐、功能最全）
+- **`vs2013-extension/`** — **Visual Studio 2013 扩展**（包名 `align_symbols_vs2013`，用于 STS8300 / ATE 机台的 VS 2013 环境）
 
 两者共用同一套对齐规则：识别“位段移位求和、`member[sub]=value` 表、方法/函数调用、嵌套成员访问链、数组下标、通用同骨架连续行”，只插入空格、不改写 token，数字右对齐。不匹配的行保持原样。
 
@@ -40,12 +40,12 @@ node test/regression.js
 # 打包（生成 release/align-symbols-<version>.vsix）
 python scripts/build_vsix.py
 # 安装
-code --install-extension release/align-symbols-0.9.0.vsix
+code --install-extension release/align_symbols_vscode-0.9.0.vsix
 ```
 使用：选中代码 → `Ctrl+Alt+A`（或命令面板 “Symbol Align (by column)”，右键菜单同名）。
 
 ### VS 2013 扩展
-打开 `vs2013-extension/AlignSymbols.sln` → 生成 → 双击 `bin\Debug\AlignSymbols.vsix` 安装。
+打开 `vs2013-extension\align_symbols_vs2013\align_symbols_vs2013.sln` → 生成 → 安装 `release\align_symbols_vs2013-0.9.0.vsix`。
 使用：**工具 → Align Selected Code**，或编辑器**右键 → Align Selected Code**。
 
 详见 `vscode/README.md` 与 `vs2013-extension/README.md`。

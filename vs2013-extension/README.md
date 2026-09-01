@@ -8,9 +8,9 @@
 
 ```
 vs2013-extension/
-├─ AlignSymbols.sln
-├─ AlignSymbols/
-│  ├─ AlignSymbols.csproj          # VS 2013 工程（.NET 4.5 / VS SDK）
+├─ align_symbols_vs2013.sln
+├─ align_symbols_vs2013/
+│  ├─ align_symbols_vs2013.csproj  # VS 2013 工程（.NET 4.5 / VS SDK）
 │  ├─ AlignSymbolsPackage.cs       # 包 + “对齐选中代码”命令（EditPoint 写回，避免死锁）
 │  ├─ Aligner.cs                   # 对齐算法（C# 移植）
 │  ├─ AlignSymbols.vsct            # 菜单：工具 + 右键
@@ -22,11 +22,11 @@ vs2013-extension/
 
 ## 编译与安装
 
-1. 用 **VS 2013** 打开 `AlignSymbols.sln`。
+1. 用 **VS 2013** 打开 `align_symbols_vs2013\align_symbols_vs2013.sln`。
 2. **生成 → 生成解决方案**（需已装 **Visual Studio 2013 SDK**）。
-3. 成功后运行 `bin\Debug\AlignSymbols.vsix` 双击安装，或：
+3. 成功后安装 `release\align_symbols_vs2013-0.9.0.vsix`，或：
    ```
-   AlignSymbols.vsix /quiet
+   align_symbols_vs2013-0.9.0.vsix /quiet
    ```
 4. **重启 VS 2013**，打开代码 → 选中块 → **工具 → Align Selected Code** 或**右键 → Align Selected Code**。
 

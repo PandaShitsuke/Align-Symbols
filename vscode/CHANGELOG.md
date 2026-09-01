@@ -2,6 +2,7 @@
 
 ## 0.9.0
 
+- Package rename: extension id is now `align_symbols_vscode` (display name unchanged).
 - Call arguments with chained subscripts (`name[s1][s2]`) are now split at the first
   `[`, so the name is padded to align the first subscript while the rest of the
   bracket chain stays glued (e.g. `ch_kelvin[site_no][0]`).

@@ -55,7 +55,7 @@ structure-identical consecutive lines.
 ### From a `.vsix` package / 从 .vsix 包安装
 
 ```bash
-code --install-extension release/align-symbols-0.9.0.vsix
+code --install-extension release/align_symbols_vscode-0.9.0.vsix
 ```
 
 Then reload the window (Command Palette → **Developer: Reload Window**) and press
