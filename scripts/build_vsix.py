@@ -6,7 +6,10 @@ PACKAGE = os.path.join(ROOT, "package.json")
 RELEASE = os.path.join(ROOT, "release")
 
 with open(PACKAGE, encoding="utf-8") as fh:
-    VERSION = json.load(fh)["version"]
+    PKG = json.load(fh)
+VERSION = PKG["version"]
+PUBLISHER = PKG["publisher"]
+ID = "%s.%s" % (PUBLISHER, PKG["name"])
 VSIX = os.path.join(RELEASE, "align-symbols-%s.vsix" % VERSION)
 
 MANIFEST = (
@@ -14,7 +17,7 @@ MANIFEST = (
     '<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" '
     'xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">\n'
     '  <Metadata>\n'
-    '    <Identity Id="codex.align-symbols" Version="%s" Language="en-US" Publisher="codex"/>\n'
+    '    <Identity Id="%s" Version="%s" Language="en-US" Publisher="%s"/>\n'
     '    <DisplayName>Symbol Align (by column)</DisplayName>\n'
     '    <Description xml:space="preserve">Align assignment symbols (=, +, &lt;&lt;, [, ], ;) by column for chained bitfield assignments.</Description>\n'
     '  </Metadata>\n'
@@ -28,7 +31,7 @@ MANIFEST = (
     '    <Asset Type="Microsoft.VisualStudio.Services.Content.License" Path="extension/LICENSE" Addressable="true"/>\n'
     '  </Assets>\n'
     '</PackageManifest>\n'
-) % VERSION
+) % (ID, VERSION, PUBLISHER)
 
 CONTENT_TYPES = (
     '<?xml version="1.0" encoding="utf-8"?>\n'
@@ -44,14 +47,16 @@ CONTENT_TYPES = (
 
 
 def add(zf, arcname, data):
-    zf.writestr(arcname, data if isinstance(data, str) else data.encode("utf-8"))
+    if isinstance(data, str):
+        data = data.encode("utf-8")
+    zf.writestr(arcname, data)
 
 
 os.makedirs(RELEASE, exist_ok=True)
 if os.path.exists(VSIX):
     os.remove(VSIX)
 
-files = ["package.json", "extension.js", "aligner.js", "README.md", "CHANGELOG.md", "LICENSE"]
+files = ["package.json", "extension.js", "aligner.js", "README.md", "CHANGELOG.md", "LICENSE", "icon.png"]
 with zipfile.ZipFile(VSIX, "w", zipfile.ZIP_DEFLATED) as zf:
     add(zf, "[Content_Types].xml", CONTENT_TYPES)
     add(zf, "extension.vsixmanifest", MANIFEST)
@@ -59,7 +64,7 @@ with zipfile.ZipFile(VSIX, "w", zipfile.ZIP_DEFLATED) as zf:
         p = os.path.join(ROOT, f)
         if not os.path.exists(p):
             raise SystemExit("missing " + p)
-        with open(p, "r", encoding="utf-8") as fh:
+        with open(p, "rb") as fh:
             add(zf, "extension/" + f, fh.read())
 
 print("wrote", VSIX, os.path.getsize(VSIX), "bytes")

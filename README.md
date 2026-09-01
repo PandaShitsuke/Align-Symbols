@@ -159,6 +159,9 @@ align-symbols/
 # build the .vsix (writes release/align-symbols-<version>.vsix)
 python scripts/build_vsix.py
 
+# regenerate the icon (128x128 PNG)
+python scripts/gen_icon.py
+
 # run the regression suite (8 cases)
 node test/regression.js
 ```
@@ -167,6 +170,66 @@ The extension is plain CommonJS — there is no compiler / bundler step; edits t
 `aligner.js` / `extension.js` take effect after reloading the debug host.
 
 （扩展为纯 CommonJS，无编译/打包步骤；改动 `aligner.js` / `extension.js` 后重载调试宿主即可。）
+
+---
+
+## Publish to VS Code Marketplace / 上架 VS Code 商店
+
+### English
+
+This extension is a valid VS Code extension (has `package.json`, `README.md`,
+`LICENSE`, `CHANGELOG.md`, an icon and a `.vscodeignore`), so it can be published to
+the [VS Code Marketplace](https://marketplace.visualstudio.com/).
+
+1. Install the publisher CLI:
+   ```bash
+   npm install -g @vscode/vsce
+   ```
+2. Create / claim your publisher ID (you must own it; it is unique):
+   ```bash
+   vsce create-publisher PandaShitsuke
+   ```
+3. Log in with a Marketplace **PAT** (Personal Access Token, `Marketplace > Manage`
+   scope) — run `vsce login PandaShitsuke`.
+4. Package (optional, to preview):
+   ```bash
+   vsce package
+   ```
+5. Publish:
+   ```bash
+   vsce publish
+   ```
+
+The `publisher` field in `package.json` must match your publisher ID. You can also
+publish a specific vsix with `vsce publish --packagePath <file>`.
+
+### 中文
+
+本项目是一个“标准合法”的 VS Code 扩展（具备 `package.json`、`README.md`、`LICENSE`、
+`CHANGELOG.md`、图标和 `.vscodeignore`），可以发布到
+[VS Code 商店](https://marketplace.visualstudio.com/)。
+
+1. 安装发布工具：
+   ```bash
+   npm install -g @vscode/vsce
+   ```
+2. 创建/认领你的 publisher（需唯一且归你所有）：
+   ```bash
+   vsce create-publisher PandaShitsuke
+   ```
+3. 用 **PAT**（个人访问令牌，勾选 `Marketplace > Manage`）登录：
+   `vsce login PandaShitsuke`。
+4. （可选）预览打包：
+   ```bash
+   vsce package
+   ```
+5. 发布：
+   ```bash
+   vsce publish
+   ```
+
+`package.json` 里的 `publisher` 必须与你的 publisher ID 一致。也可以用
+`vsce publish --packagePath <文件>` 发布指定的 vsix。
 
 ---
 
